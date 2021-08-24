@@ -28,7 +28,7 @@ type CartItemsProps = {
 export default function CartItems({items, isEditable}: CartItemsProps) {
   const classes = useStyles();
 
-  const totalPrice: number = items.reduce((total, item) => (item.count * item.product.price?.data[0].amount + total), 0);
+  const totalPrice: number = items.reduce((total, item) => (item.count * (item.product.price ? item.product.price.data[0].amount : 0) + total), 0);
 
   return (
     <>
@@ -38,7 +38,7 @@ export default function CartItems({items, isEditable}: CartItemsProps) {
             {isEditable && <AddProductToCart product={cartItem.product}/>}
             <ListItemText primary={cartItem.product.name} secondary={cartItem.product.description}/>
             <Typography
-              variant="body2">{formatAsPrice(cartItem.product.price)} x {cartItem.count} = {formatAsPrice({ data: [{ amount: cartItem.product.price?.data[0].amount * cartItem.count}]})}</Typography>
+              variant="body2">{formatAsPrice(cartItem.product.price)} x {cartItem.count} = {formatAsPrice({ data: [{ amount: (cartItem.product.price ? cartItem.product.price.data[0].amount : 0) * cartItem.count}]})}</Typography>
           </ListItem>
         ))}
         <ListItem className={classes.listItem}>
