@@ -17,7 +17,7 @@ export default function ProductsTable() {
 
   useEffect(() => {
     axios.get(`${API_PATHS.bff}/products`)
-      .then(res => setProducts(res.data));
+      .then(res => setProducts(res.data.data));
   }, []);
 
   const onDelete = (id: string) => {
