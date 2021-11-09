@@ -11,7 +11,7 @@ import axios from 'axios';
 axios.interceptors.response.use(
   response => response,
   error => {
-    const { data, status } = error?.response;
+    const { data, status } = error?.response || {};
     const message = data?.message || data;
 
     if ([400, 401, 403].includes(status)) {
